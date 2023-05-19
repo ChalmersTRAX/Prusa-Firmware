@@ -793,7 +793,7 @@ int uart_putchar(char c, FILE *)
 void lcd_splash()
 {
 	lcd_clear(); // clears display and homes screen
-	lcd_printf_P(PSTR("\n Original Prusa i3\n   Prusa Research\n%20.20S"), PSTR(FW_VERSION));
+	lcd_printf_P(PSTR("\n Original Prusa i3\n   T-RAX Chalmers\n%20.20S"), PSTR(FW_VERSION));
 }
 
 
@@ -1623,6 +1623,8 @@ void setup()
   WDTCSR |= (1 << WDIE);
 #endif //EMERGENCY_HANDLERS
 #endif //WATCHDOG
+
+  SET_INPUT(BTN_TOGGLE_LOCK_MODE);
 }
 
 static inline void crash_and_burn(dump_crash_reason reason)
@@ -1849,6 +1851,9 @@ void loop()
 	}
 #endif //TMC2130
 	MMU2::mmu2.mmu_loop();
+  
+  // Check lockmode
+  locked_mode = READ(BTN_TOGGLE_LOCK_MODE) == HIGH;
 }
 
 #define DEFINE_PGM_READ_ANY(type, reader)       \

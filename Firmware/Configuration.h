@@ -16,8 +16,8 @@ extern const char _sPrinterMmuName[] PROGMEM;
 #define FW_MAJOR 3
 #define FW_MINOR 13
 #define FW_REVISION 0
-//#define FW_FLAVOR RC      //uncomment if DEBUG, DEVEL, ALPHA, BETA or RC
-//#define FW_FLAVERSION 1   //uncomment if FW_FLAVOR is defined and versioning is needed. Limited to max 8.
+#define FW_FLAVOR TRAX      //uncomment if DEBUG, DEVEL, APLHA, BETA or RC
+#define FW_FLAVERSION 1     //uncomment if FW_FLAVOR is defined and versioning is needed.
 #ifndef FW_FLAVOR
     #define FW_VERSION STR(FW_MAJOR) "." STR(FW_MINOR) "." STR(FW_REVISION)
 #else
@@ -82,8 +82,10 @@ extern const char _sPrinterMmuName[] PROGMEM;
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 
-#define STRING_VERSION_CONFIG_H SOURCE_DATE_EPOCH " " SOURCE_TIME_EPOCH // build date and time
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+//#define STRING_VERSION "1.0.2"
+
+#define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
+#define STRING_CONFIG_H_AUTHOR "(Karl Strålman, T-RAX-patch)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.

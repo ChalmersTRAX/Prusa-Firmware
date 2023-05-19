@@ -61,7 +61,7 @@ fi
 #
 # Set default languages
 if [ -z "$LANGUAGES" ]; then
-    export LANGUAGES="cs de es fr it pl"
+    export LANGUAGES="cz de es fr it pl"
 fi
 #
 # Check for community languages

@@ -73,6 +73,7 @@ CustomMsg custom_message_type = CustomMsg::Status;
 uint8_t custom_message_state = 0;
 
 bool isPrintPaused = false;
+uint8_t locked_mode = 1; // Default put menu settings as locked
 
 static ShortTimer display_time; //just timer for showing pid finished message on lcd;
 static uint16_t pid_temp = DEFAULT_PID_TEMP;
@@ -5160,9 +5161,10 @@ static void lcd_main_menu()
     if (farm_mode)
         MENU_ITEM_FUNCTION_P(_T(MSG_FILAMENTCHANGE), lcd_colorprint_change);//8
 
+
     if ( moves_planned() || printer_active() ) {
-        MENU_ITEM_SUBMENU_P(_i("Tune"), lcd_tune_menu);////MSG_TUNE c=18
-    } else if (!Stopped) {
+        if (!locked_mode) MENU_ITEM_SUBMENU_P(_i("Tune"), lcd_tune_menu);////MSG_TUNE c=18
+    } else {
         MENU_ITEM_SUBMENU_P(_i("Preheat"), lcd_preheat_menu);////MSG_PREHEAT c=18
     }
 
@@ -5249,21 +5251,21 @@ static void lcd_main_menu()
             }
             MENU_ITEM_SUBMENU_P(_T(MSG_UNLOAD_FILAMENT), lcd_unLoadFilament);
         }
-    MENU_ITEM_SUBMENU_P(_T(MSG_SETTINGS), lcd_settings_menu);
-    if(!isPrintPaused) MENU_ITEM_SUBMENU_P(_T(MSG_CALIBRATION), lcd_calibration_menu);
+    if (!locked_mode) MENU_ITEM_SUBMENU_P(_T(MSG_SETTINGS), lcd_settings_menu);
+    if(!isPrintPaused && !locked_mode) MENU_ITEM_SUBMENU_P(_T(MSG_CALIBRATION), lcd_calibration_menu);
     }
 
     if (!usb_timer.running() && (lcd_commands_type != LcdCommands::Layer1Cal)) {
-        MENU_ITEM_SUBMENU_P(_i("Statistics"), lcd_menu_statistics);////MSG_STATISTICS c=18
+        if (!locked_mode) MENU_ITEM_SUBMENU_P(_i("Statistics"), lcd_menu_statistics);////MSG_STATISTICS c=18
     }
 
 #if defined(TMC2130) || defined(FILAMENT_SENSOR)
-    MENU_ITEM_SUBMENU_P(_i("Fail stats"), lcd_menu_fails_stats);////MSG_FAIL_STATS c=18
+    if (!locked_mode) MENU_ITEM_SUBMENU_P(_i("Fail stats"), lcd_menu_fails_stats);////MSG_FAIL_STATS c=18
 #endif
     if (MMU2::mmu2.Enabled()) {
         MENU_ITEM_SUBMENU_P(_i("Fail stats MMU"), lcd_menu_fails_stats_mmu);////MSG_MMU_FAIL_STATS c=18
     }
-    MENU_ITEM_SUBMENU_P(_i("Support"), lcd_support_menu);////MSG_SUPPORT c=18
+    if (!locked_mode) MENU_ITEM_SUBMENU_P(_i("Support"), lcd_support_menu);////MSG_SUPPORT c=18
 
     MENU_END();
 
