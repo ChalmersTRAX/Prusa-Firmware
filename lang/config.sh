@@ -69,7 +69,7 @@ fi
 #
 # Set default languages
 if [ -z "$LANGUAGES" ]; then
-    export LANGUAGES="cz de es fr it pl"
+    #export LANGUAGES="cz de es fr it pl"
 fi
 #
 # Check for community languages
@@ -88,7 +88,7 @@ elif [ "$COMMUNITY_LANG_GROUP" = "3" ]; then
 fi
 
 if [ -z "$COMMUNITY_LANGUAGES" ]; then
-    export COMMUNITY_LANGUAGES="$COMMUNITY_LANGUAGES"
+    #export COMMUNITY_LANGUAGES="$COMMUNITY_LANGUAGES"
 fi
 
 echo "$(tput setaf 2)config.sh started$(tput sgr0)" >&2

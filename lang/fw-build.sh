@@ -45,16 +45,17 @@ CHECK_MISSING_TEXT=0
 if [ "$1" = "--check-missing-text" ]; then
  CHECK_MISSING_TEXT=1
 fi
+LANGUAGES=""
 
-# List of supported languages
-if [ -z "$LANGUAGES" ]; then
- LANGUAGES="cz de es fr it pl"
-fi
+# # List of supported languages
+# if [ -z "$LANGUAGES" ]; then
+#  LANGUAGES="cz de es fr it pl"
+# fi
 
-# Community languages
-if [ ! -z "$COMMUNITY_LANGUAGES" ]; then
-  LANGUAGES+=" $COMMUNITY_LANGUAGES"
-fi
+# # Community languages
+# if [ ! -z "$COMMUNITY_LANGUAGES" ]; then
+#   LANGUAGES+=" $COMMUNITY_LANGUAGES"
+# fi
 echo "$(tput setaf 2)fw-build.sh started$(tput sgr 0)" >&2
 echo "fw-build languages:$(tput setaf 2)$LANGUAGES$(tput sgr 0)" >&2
 
