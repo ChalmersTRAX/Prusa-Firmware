@@ -133,6 +133,8 @@ extern uint8_t farm_mode;
 extern int farm_timer;
 extern uint8_t farm_status;
 
+extern uint8_t locked_mode;
+
 extern bool UserECoolEnabled();
 extern bool FarmOrUserECool();
 
