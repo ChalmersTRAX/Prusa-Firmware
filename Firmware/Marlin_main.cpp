@@ -1724,6 +1724,8 @@ void setup()
   WDTCSR |= (1 << WDIE);
 #endif //EMERGENCY_HANDLERS
 #endif //WATCHDOG
+
+  SET_INPUT(BTN_TOGGLE_LOCK_MODE);
 }
 
 
@@ -2027,6 +2029,9 @@ void loop()
 	}
 #endif //TMC2130
 	mmu_loop();
+  
+  // Check lockmode
+  locked_mode = READ(BTN_TOGGLE_LOCK_MODE) == HIGH;
 }
 
 #define DEFINE_PGM_READ_ANY(type, reader)       \
