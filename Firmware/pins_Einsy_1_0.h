@@ -143,7 +143,7 @@
 #define LOGIC_ANALYZER_CH4_ENABLE do { DDRK |= 1 << 0; WRITE_LOGIC_ANALYZER_CH4(false); } while (0)
 #define LOGIC_ANALYZER_CH5_ENABLE do { cbi(UCSR2B, TXEN2); cbi(UCSR2B, RXEN2); cbi(UCSR2B, RXCIE2); SET_OUTPUT(LOGIC_ANALYZER_CH5); WRITE(LOGIC_ANALYZER_CH5, false); } while (0)
 #define LOGIC_ANALYZER_CH6_ENABLE do { cbi(UCSR2B, TXEN2); cbi(UCSR2B, RXEN2); cbi(UCSR2B, RXCIE2); SET_OUTPUT(LOGIC_ANALYZER_CH6); WRITE(LOGIC_ANALYZER_CH6, false); } while (0)
-#define LOGIC_ANALYZER_CH7_ENABLE do { SET_OUTPUT(LOGIC_ANALYZER_CH7); WRITE(LOGIC_ANALYZER_CH7, false); } while (0)
+//#define LOGIC_ANALYZER_CH7_ENABLE do { SET_OUTPUT(LOGIC_ANALYZER_CH7); WRITE(LOGIC_ANALYZER_CH7, false); } while (0)
 
 // Async output on channel 5 of the logical analyzer.
 // Baud rate 2MBit, 9 bits, 1 stop bit.
@@ -157,5 +157,6 @@
 	LOGIC_ANALYZER_SERIAL_TX_WRITE_NC(C); \
 } while (0)
 
-#define BTN_TOGGLE_LOCK_MODE 7
+// Since we don't use LOGIC_ANALYZER_CH7 we can safely use this one
+#define BTN_TOGGLE_LOCK_MODE 76
 
